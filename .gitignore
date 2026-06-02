@@ -1,0 +1,5 @@
+/build/
+/build-*/
+/gcm.cache/
+/.cache/
+compile_commands.json

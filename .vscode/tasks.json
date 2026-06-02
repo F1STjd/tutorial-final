@@ -1,0 +1,64 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Configure: gcc-debug",
+      "type": "shell",
+      "command": "cmake --preset gcc-debug",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Configure: clang-debug",
+      "type": "shell",
+      "command": "cmake --preset clang-debug",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Configure: debug (parallel)",
+      "dependsOn": ["Configure: gcc-debug", "Configure: clang-debug"],
+      "dependsOrder": "parallel",
+      "problemMatcher": []
+    },
+    {
+      "label": "Build: gcc-debug",
+      "type": "shell",
+      "command": "cmake --build --preset gcc-debug",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": ["$gcc"]
+    },
+    {
+      "label": "Build: clang-debug",
+      "type": "shell",
+      "command": "cmake --build --preset clang-debug",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": ["$gcc"]
+    },
+    {
+      "label": "Build: debug (parallel)",
+      "dependsOn": ["Build: gcc-debug", "Build: clang-debug"],
+      "dependsOrder": "parallel",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Configure + Build: debug (parallel)",
+      "dependsOrder": "sequence",
+      "dependsOn": ["Configure: debug (parallel)", "Build: debug (parallel)"],
+      "group": "build",
+      "problemMatcher": []
+    }
+  ]
+}
